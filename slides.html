@@ -1,20 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Building Reproducible and Replicable Projects</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Daniel Chen @chendaniely" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Building Reproducible and Replicable Projects
+## R Workflows
+### Daniel Chen <span class="citation">@chendaniely</span>
+### NYR Conference 2019 <a href="https://github.com/chendaniely/rstatsnyc_2019-workflow" class="uri">https://github.com/chendaniely/rstatsnyc_2019-workflow</a>
+
 ---
-title: "Building Reproducible and Replicable Projects"
-subtitle: "R Workflows"
-author: "Daniel Chen @chendaniely"
-#institute: ""
-date: "NYR Conference 2019\nhttps://github.com/chendaniely/rstatsnyc_2019-workflow"
-output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
----
+
 class: inverse
 
-<style>
+&lt;style&gt;
 div.hello {
     font-size: 600px;
 }
@@ -26,16 +32,14 @@ div.demo {
 div.halfLink {
     font-size: 18px;
 }
-</style>
+&lt;/style&gt;
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-<center>
-<div class="hello">hi!</div>
-</center>
+
+&lt;center&gt;
+&lt;div class="hello"&gt;hi!&lt;/div&gt;
+&lt;/center&gt;
 
 ---
 
@@ -43,7 +47,7 @@ class: inverse
 
 # I'm Daniel
 .pull-left[
-<img src='./figs/daniel_square-800x800.jpg'></img>
+&lt;img src='./figs/daniel_square-800x800.jpg'&gt;&lt;/img&gt;
 ]
 
 .pull-right[
@@ -54,16 +58,16 @@ class: inverse
 - RStudio Intern!
 - Author:
 
-<center>
-<img src='./figs/book.jpg' style="width:200px;"></img>
-</center>
+&lt;center&gt;
+&lt;img src='./figs/book.jpg' style="width:200px;"&gt;&lt;/img&gt;
+&lt;/center&gt;
 ]
 
 ---
 
-<center>
-<img src='./figs/tweet_pycon2019.png' style="height:600px;"></img>
-</center>
+&lt;center&gt;
+&lt;img src='./figs/tweet_pycon2019.png' style="height:600px;"&gt;&lt;/img&gt;
+&lt;/center&gt;
 
 ---
 
@@ -74,11 +78,11 @@ class: inverse
 ### Ginnie Springs, FL
 
 .pull-left[
-<img src='./figs/scuba_ginnie_catacomb.jpg'></img>
+&lt;img src='./figs/scuba_ginnie_catacomb.jpg'&gt;&lt;/img&gt;
 ]
 
 .pull-right[
-<img src='./figs/scuba_ginnie_ear.jpg'></img>
+&lt;img src='./figs/scuba_ginnie_ear.jpg'&gt;&lt;/img&gt;
 ]
 
 - https://www.submergedscuba.com/
@@ -88,9 +92,9 @@ class: inverse
 
 # Continuing the DCR 2018 Story
 
-<center>
-<img src='./figs/rstatsdc_2018-slide.png'></img>
-</center>
+&lt;center&gt;
+&lt;img src='./figs/rstatsdc_2018-slide.png'&gt;&lt;/img&gt;
+&lt;/center&gt;
 
 https://youtu.be/UQHz38s3DyA
 
@@ -110,7 +114,7 @@ It doesn't matter where you are in your learning path
 
 ## tl;dr
 
-> I just want stuff to run the first time around
+&gt; I just want stuff to run the first time around
 
 ---
 
@@ -126,9 +130,9 @@ It doesn't matter where you are in your learning path
 ]
 
 .pull-right[
-<center>
-<img src='figs/expanding_brain.png' height='650px'></img>
-</center>
+&lt;center&gt;
+&lt;img src='figs/expanding_brain.png' height='650px'&gt;&lt;/img&gt;
+&lt;/center&gt;
 ]
 
 ---
@@ -195,7 +199,7 @@ $ Rscript 01-load.R
 
 - Background the script
 ```bash
-$ nohup Rscript 01-load.R &
+$ nohup Rscript 01-load.R &amp;
 ```
 
 ---
@@ -203,20 +207,20 @@ $ nohup Rscript 01-load.R &
 # Jobs tab in RStudio!
 
 .pull-left[
-<center>
-<img src='figs/rstudio_jobs-tab.png'></img>
-</center>
+&lt;center&gt;
+&lt;img src='figs/rstudio_jobs-tab.png'&gt;&lt;/img&gt;
+&lt;/center&gt;
 ]
 
 .pull-right[
-<center>
-<img src='figs/rstudio_jobs-dialogue.png'></img>
-</center>
+&lt;center&gt;
+&lt;img src='figs/rstudio_jobs-dialogue.png'&gt;&lt;/img&gt;
+&lt;/center&gt;
 ]
 
-<center>
-<img src='figs/rstudio_jobs-jobs.png'></img>
-</center>
+&lt;center&gt;
+&lt;img src='figs/rstudio_jobs-jobs.png'&gt;&lt;/img&gt;
+&lt;/center&gt;
 
 ---
 
@@ -289,7 +293,7 @@ class: center
 
 # Draw your build scripts (Make)
 
-<img src='figs/make_graph.jpg' height='600px'></img>
+&lt;img src='figs/make_graph.jpg' height='600px'&gt;&lt;/img&gt;
 
 ---
 
@@ -418,9 +422,9 @@ install.packages("drake")
 # A drake plan
 
 ```r
-plan <- drake_plan(
+plan &lt;- drake_plan(
   raw_data = readxl::read_excel(file_in("raw_data.xlsx")),
-  data = raw_data %>%
+  data = raw_data %&gt;%
     mutate(Species = forcats::fct_inorder(Species)),
   hist = create_plot(data),
   fit = lm(Sepal.Width ~ Petal.Width + Species, data),
@@ -431,14 +435,14 @@ plan <- drake_plan(
   )
 )
 plan
-#> # A tibble: 5 x 2
-#>   target   command                                                         
-#>   <chr>    <expr>                                                          
-#> 1 raw_data readxl::read_excel(file_in("raw_data.xlsx"))                   …
-#> 2 data     raw_data %>% mutate(Species = forcats::fct_inorder(Species))   …
-#> 3 hist     create_plot(data)                                              …
-#> 4 fit      lm(Sepal.Width ~ Petal.Width + Species, data)                  …
-#> 5 report   rmarkdown::render(knitr_in("report.Rmd"), output_file = file_ou…
+#&gt; # A tibble: 5 x 2
+#&gt;   target   command                                                         
+#&gt;   &lt;chr&gt;    &lt;expr&gt;                                                          
+#&gt; 1 raw_data readxl::read_excel(file_in("raw_data.xlsx"))                   …
+#&gt; 2 data     raw_data %&gt;% mutate(Species = forcats::fct_inorder(Species))   …
+#&gt; 3 hist     create_plot(data)                                              …
+#&gt; 4 fit      lm(Sepal.Width ~ Petal.Width + Species, data)                  …
+#&gt; 5 report   rmarkdown::render(knitr_in("report.Rmd"), output_file = file_ou…
 ```
 ---
 
@@ -447,7 +451,7 @@ plan
 ### drake plans rely more on in-memory functions
 
 ```r
-bad_plan <- drake_plan(
+bad_plan &lt;- drake_plan(
   my_data = source(file_in("get_data.R")),
   my_analysis = source(file_in("analyze_data.R")),
   my_summaries = source(file_in("summarize_data.R"))
@@ -483,11 +487,11 @@ bad_plan <- drake_plan(
 library(lobstr)
 
 ast(a + b + c)
-#> █─`+` 
-#> ├─█─`+` 
-#> │ ├─a 
-#> │ └─b 
-#> └─c
+#&gt; █─`+` 
+#&gt; ├─█─`+` 
+#&gt; │ ├─a 
+#&gt; │ └─b 
+#&gt; └─c
 ```
 
 - Use implement my find input/output script dectector
@@ -502,3 +506,94 @@ class: center, middle, inverse
 @chendaniely
 
 Slides: https://github.com/chendaniely/rstatsnyc_2019-workflow
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+BILLBOARD=./analysis/billboard_eda
+DO=./data/original
+DP_BILLBOARD=./data/processed/billboard
+O_BILLBOARD_PLOTS=./output/billboard_rank_plots
+O_BILLBOARD_REPORTS=./output/billboard_reports
+
+all : commands
+
+## commands        : show all commands.
+commands :
+	@grep -E '^##' Makefile2 | sed -e 's/## //g'
+
+## tidy            : make tidy dataset for analysis
+.PHONY: tidy
+tidy: $(DP_BILLBOARD)/billboard_tidy.csv \
+      $(DP_BILLBOARD)/songs.csv \
+      $(DP_BILLBOARD)/rank.csv
+
+$(DP_BILLBOARD)/billboard.csv: $(DO)/billboard.csv \
+                               $(BILLBOARD)/01-load.R
+	Rscript $(BILLBOARD)/01-load.R
+$(DP_BILLBOARD)/billboard_clean.csv: $(DP_BILLBOARD)/billboard.csv \
+                                     $(BILLBOARD)/02-01*.R
+	Rscript $(BILLBOARD)/02-01*.R
+$(DP_BILLBOARD)/billboard_tidy.csv: $(DP_BILLBOARD)/billboard_clean.csv \
+                                    $(BILLBOARD)/02-02*.R
+	Rscript $(BILLBOARD)/02-02*.R
+$(DP_BILLBOARD)/songs.csv: $(DP_BILLBOARD)/billboard_tidy.csv \
+                           $(BILLBOARD)/02-03*.R
+	Rscript $(BILLBOARD)/02-03*.R
+$(DP_BILLBOARD)/rank.csv: $(DP_BILLBOARD)/billboard_tidy.csv \
+                          $(BILLBOARD)/02-03*.R
+	Rscript $(BILLBOARD)/02-03*.R
+
+## eda             : create the eda report
+.PHONY: eda
+eda: $(DP_BILLBOARD)/rank.csv \
+     $(O_BILLBOARD_REPORTS)/03-eda.html
+
+$(O_BILLBOARD_REPORTS)/03-eda.html: $(BILLBOARD)/03-eda.Rmd
+	Rscript -e "rmarkdown::render(here::here('./analysis/billboard_eda/03-eda.Rmd'), output_dir = './output/billboard_reports')"
+
+## model           : create the model report
+.PHONY: model
+model: $(DP_BILLBOARD)/billboard_tidy.csv \
+       $(O_BILLBOARD_REPORTS)/04-model.html
+
+$(O_BILLBOARD_REPORTS)/04-model.html: $(BILLBOARD)/04-model.Rmd
+	Rscript -e "rmarkdown::render(here::here('./analysis/billboard_eda/04-model.Rmd'), output_dir = './output/billboard_reports')"
+
+## reports         : create the eda and model reports
+.PHONY: reports
+reports: $(O_BILLBOARD_REPORTS)/03-eda.html \
+         $(O_BILLBOARD_REPORTS)/04-model.html
+
+## tidy_and_reports: run the entire tidy and report pipeline
+.PHONY: tidy_and_reports
+tidy_and_reports: tidy reports
+
+## clean           : remove generated files.
+.PHONY : clean
+clean :
+	find data/processed/ -type f -name '*.csv' -exec rm -f {} \;
+	find analysis/ -type f -name '*.html' -exec rm -f {} \;
+	find output/ -type f -exec rm -rf {} \;
